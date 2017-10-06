@@ -46,8 +46,8 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li><a href="{{ route('profile',['id'=>Auth::user()->id]) }}">Profile</a></li>
                             <li class="dropdown">
-                                <a href="{{ route('profile',['id'=>Auth::user()->id]) }}">Profile</a>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->email }} <span class="caret"></span>
                                 </a>

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -8,6 +9,14 @@
                     <div class="panel-heading">Profile</div>
 
                     <div class="panel-body">
+                        @if (Session::has('success'))
+                            <div class="alert alert-success alert-dismissible show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {!! session('success') !!}
+                            </div>
+                        @endif
                         {{ Form::open(array('url' => route('update',['id'=>Auth::user()->id]),
                         'class'=>'form-horizontal')) }}
 
@@ -16,7 +25,8 @@
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="User[email]" value="{{ old('User.email') }}" required>
+                                    <input id="email" type="email" class="form-control" name="User[email]"
+                                           value="{{ old('User.email') ? old('User.email'):$user->email }}" required>
 
                                     @if ($errors->has('User.email'))
                                         <span class="help-block">
@@ -31,7 +41,8 @@
 
                                 <div class="col-md-6">
                                     <input id="student.firstname" type="text" class="form-control"
-                                           name="Student[firstname]" value="{{ old('Student.firstname') }}" required>
+                                           name="Student[firstname]"
+                                           value="{{ old('Student.firstname')?old('Student.firstname'):$student->firstname }}" required>
 
                                     @if ($errors->has('Student.firstname'))
                                         <span class="help-block">
@@ -45,7 +56,8 @@
 
                                 <div class="col-md-6">
                                     <input id="student.lastname" type="text" class="form-control"
-                                           name="Student[lastname]" value="{{ old('Student.lastname') }}" required>
+                                           name="Student[lastname]"
+                                           value="{{ old('Student.lastname') ? old('Student.lastname') : $student->lastname }}" required>
 
                                     @if ($errors->has('Student.lastname'))
                                         <span class="help-block">
@@ -59,7 +71,8 @@
 
                                 <div class="col-md-6">
                                     <input id="student.birthdate" type="date" class="form-control"
-                                           name="Student[birthdate]" value="{{ old('Student.birthdate') }}" required>
+                                           name="Student[birthdate]"
+                                           value="{{ old('Student.birthdate') ? old('Student.birthdate') : $student->birthdate  }}" required>
 
                                     @if ($errors->has('Student.birthdate'))
                                         <span class="help-block">
@@ -73,7 +86,8 @@
 
                                 <div class="col-md-6">
                                     {{Form::select('Student[gender]',
-                                     array(''=>'Select your gender','M' => 'Male', 'F' => 'Female'),old('Student.gender'),
+                                     array(''=>'Select your gender','M' => 'Male', 'F' => 'Female'),
+                                     old('Student.gender') ? old('Student.gender') : $student->gender,
                                      array('id'=>'student.gender','class'=>'form-control','required'))}}
 
                                     @if ($errors->has('Student.gender'))
@@ -87,7 +101,8 @@
                                 <label for="student.group_number" class="col-md-4 control-label">Group Number</label>
 
                                 <div class="col-md-6">
-                                    {{Form::text('Student[group_number]',old('Student.group_number'),
+                                    {{Form::text('Student[group_number]',
+                                    old('Student.group_number') ? old('Student.group_number') : $student->group_number,
                                             array('class'=>'form-control','id'=>'student.group_number','required'))}}
 
                                     @if ($errors->has('Student.group_number'))
@@ -101,7 +116,8 @@
                                 <label for="student.group_number" class="col-md-4 control-label">Rates</label>
 
                                 <div class="col-md-6">
-                                    {{Form::text('Student[rates]',old('Student.rates'),
+                                    {{Form::text('Student[rates]',
+                                    old('Student.rates') ? old('Student.rates') : $student->rates,
                                             array('class'=>'form-control','id'=>'student.rates','required'))}}
 
                                     @if ($errors->has('Student.rates'))
@@ -117,7 +133,7 @@
                                 <div class="col-md-6">
                                     {{Form::select('Student[location]',
                                      array(''=>'Select your location','local' => 'Local', 'foreign' => 'Foreign'),
-                                     old('Student.location'),
+                                     old('Student.location') ? old('Student.location') : $student->location,
                                      array('id'=>'student.location','class'=>'form-control','required'))}}
 
                                     @if ($errors->has('Student.location'))
