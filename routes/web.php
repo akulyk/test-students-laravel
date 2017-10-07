@@ -20,7 +20,9 @@ Route::get('/', 'HomeController@index')->name('home');
 //Доступно для авторизированных
 Route::group(['middleware' => 'auth'], function () {
 
-
+    Route::get('/home', function(){
+        return redirect(route('profile',['id'=>Auth::user()->id]));
+    });
     Route::get('/profile/{id}', 'StudentsController@view')->name('profile');
     Route::post('/update/{id}', 'StudentsController@store')->name('update');
     Route::get('/', 'HomeController@index')->name('search');
