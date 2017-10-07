@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
 
-class Student extends Model
+class Student extends BaseModel
 {
     // Sortable Behavior
     use Sortable;
@@ -13,4 +13,7 @@ class Student extends Model
     protected $fillable = array('user_id');
 
     public $sortable = ['id', 'firstname', 'lastname', 'group_number', 'rates'];
+
+
+
 }

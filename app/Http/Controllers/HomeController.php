@@ -32,15 +32,21 @@ class HomeController extends Controller
               'q' =>'string|max:255'
             ]);
 
-           $query->whereRaw("LOWER(`firstname`) LIKE LOWER('%$q%')");
-           $query->orWhereRaw("LOWER(`lastname`) LIKE LOWER('%$q%')");
-           $query->orWhereRaw("LOWER(`group_number`) LIKE LOWER('%$q%')");
-           $query->orWhereRaw("LOWER(`rates`) ='$q'");
+          $this->prepareSearchQuery($query,$q);
 
         }
 
         $students = $query->paginate(50);
         $data['students'] = & $students;
         return view('home',$data);
+    }/**/
+
+    protected function prepareSearchQuery(& $query,$q){
+        $query->whereRaw("LOWER(`firstname`) LIKE LOWER('%$q%')");
+        $query->orWhereRaw("LOWER(`lastname`) LIKE LOWER('%$q%')");
+        $query->orWhereRaw("LOWER(`group_number`) LIKE LOWER('%$q%')");
+        $query->orWhereRaw("LOWER(`rates`) ='$q'");
+
+
     }
 }

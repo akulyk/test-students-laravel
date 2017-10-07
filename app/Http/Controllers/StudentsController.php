@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreStudent;
 use Illuminate\Support\Facades\Form;
 
+
 class StudentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isOwner');
+    }
 
     public function view(int $id){
         $student = Student::firstOrNew(array('user_id' => $id));
@@ -21,14 +26,17 @@ class StudentsController extends Controller
 
     public function store(StoreStudent $request,Student $student,int $id)
     {
-        $data = $request->all()['Student'];
+        $dataStudent = $request->all()['Student'];
+        $dataUser = $request->all()['User'];
+
        $student = Student::firstOrNew(array('user_id' => $id));
+       $user = User::find(\Auth::user()->id);
 
-       foreach($data as $col =>$val){
-           $student->{$col} = $val;
-       }
+        $student->loadData($dataStudent);
+        $user->loadData($dataUser);
 
-           $student->save();
+        $user->save();
+        $student->save();
         $request->session()->flash('success', 'Profile updated!');
         return redirect(route('profile',['id'=>$id]));
     }

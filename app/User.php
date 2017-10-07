@@ -30,5 +30,15 @@ class User extends Authenticatable
 
     public function student(){
         return $this->hasOne('App\Models\Student');
-    }
+    }/**/
+
+    public function loadData($data = [])
+    {
+        if (count($data)> 0){
+            foreach($data as $col =>$val){
+                $this->{$col} = $val;
+            }
+        }
+    }/**/
+
 }
