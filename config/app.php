@@ -180,6 +180,9 @@ return [
         // Html
         Collective\Html\HtmlServiceProvider::class,
 
+        //Sortable
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+
     ],
 
     /*

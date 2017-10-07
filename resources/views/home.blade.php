@@ -13,8 +13,29 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                @unless( empty( $students ) )
+                <table class="table">
+                    <thead>
+                        <th>@sortablelink('id')</th>
+                        <th>@sortablelink('firstname')</th>
+                        <th>@sortablelink('lastname')</th>
+                        <th>@sortablelink('group_number')</th>
+                        <th>@sortablelink('rates')</th>
+                    </thead>
+                    <tbody>
+                    @foreach( $students as $student )
+                        <tr>
+                            <td>{{$student->id}}</td>
+                            <td>{{$student->firstname}}</td>
+                            <td>{{$student->lastname}}</td>
+                            <td>{{$student->group_number}}</td>
+                            <td>{{$student->rates}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                            {!! $students->appends(\Request::except('page'))->render() !!}
+                @endunless
                 </div>
             </div>
         </div>
