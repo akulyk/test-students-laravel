@@ -25,7 +25,21 @@ class HomeController extends Controller
     public function index(Student $student, Request $request)
     {
         $data = [];
-        $students = $student->sortable(['rates'=>'desc'])->paginate(50);
+        $query = $student->sortable(['rates'=>'desc']);
+
+        if($q = $request->input('q')){
+            $this->validate($request,[
+              'q' =>'string|max:255'
+            ]);
+
+           $query->whereRaw("LOWER(`firstname`) LIKE LOWER('%$q%')");
+           $query->orWhereRaw("LOWER(`lastname`) LIKE LOWER('%$q%')");
+           $query->orWhereRaw("LOWER(`group_number`) LIKE LOWER('%$q%')");
+           $query->orWhereRaw("LOWER(`rates`) ='$q'");
+
+        }
+
+        $students = $query->paginate(50);
         $data['students'] = & $students;
         return view('home',$data);
     }
