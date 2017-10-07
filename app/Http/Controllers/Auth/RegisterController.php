@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/new';
 
     /**
      * Create a new controller instance.
@@ -66,4 +66,12 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected function redirectTo()
+    {
+        session()->flash('success','Thank you for your registration! 
+           Now you should fill your profile with data');
+        return '/profile/'.\Auth::user()->id;
+    }
+
 }

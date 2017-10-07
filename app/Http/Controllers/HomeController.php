@@ -41,6 +41,7 @@ class HomeController extends Controller
         return view('home',$data);
     }/**/
 
+
     protected function prepareSearchQuery(& $query,$q){
         $query->whereRaw("LOWER(`firstname`) LIKE LOWER('%$q%')");
         $query->orWhereRaw("LOWER(`lastname`) LIKE LOWER('%$q%')");
