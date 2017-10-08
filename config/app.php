@@ -177,11 +177,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Helpers
+        App\Providers\HelperServiceProvider::class,
+
         // Html
         Collective\Html\HtmlServiceProvider::class,
 
         //Sortable
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+
+
 
     ],
 
@@ -232,6 +237,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'SearchHelper' => App\Helpers\SearchHelper::class,
 
     ],
 

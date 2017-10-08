@@ -1,3 +1,7 @@
 .panel-heading.no-overflow{
     overflow:hidden;
 }
+
+span.finded{
+color:green;
+}

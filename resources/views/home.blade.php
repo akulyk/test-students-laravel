@@ -55,10 +55,10 @@
                     @foreach( $students as $student )
                         <tr>
                             <td>{{$student->id}}</td>
-                            <td>{{$student->firstname}}</td>
-                            <td>{{$student->lastname}}</td>
-                            <td>{{$student->group_number}}</td>
-                            <td>{{$student->rates}}</td>
+                            <td>{!!  SearchHelper::mark($student->firstname) !!}</td>
+                            <td>{!!  SearchHelper::mark($student->lastname) !!}</td>
+                            <td>{!!  SearchHelper::mark($student->group_number) !!}</td>
+                            <td>{!!  SearchHelper::mark($student->rates) !!}</td>
                         </tr>
                     @endforeach
                     </tbody>
