@@ -12,11 +12,9 @@ class SearchHelper
 
        $input = mb_strtolower(request()->q);
        $newString = mb_strtolower($string);
-       if ($input == $newString){
-           $html = '';
-           $html .="<span class='finded'>";
-           $html .=$string;
-           $html .="</span>";
+       if (strpos($newString,$input) !== false ){
+           $html = preg_replace("#($input)#i",
+               "<span class='finded'>$1</span>",$string);
        } else{
            $html = $string;
        }
