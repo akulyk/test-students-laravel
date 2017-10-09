@@ -20,7 +20,7 @@ Auth::routes();
 //Доступно для авторизированных
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/home', 'HomeController@isNew');
+    Route::get('/home', 'HomeController@index');
     Route::get('/new', 'HomeController@isNew');
     Route::get('/profile/{id}', 'StudentsController@view')->name('profile');
     Route::post('/update/{id}', 'StudentsController@store')->name('update');
