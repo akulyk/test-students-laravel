@@ -11,6 +11,10 @@ class SearchHelper
 
 
        $input = mb_strtolower(request()->q);
+       if(!$input){
+           return $string;
+       }
+
        $newString = mb_strtolower($string);
        if (strpos($newString,$input) !== false ){
            $html = preg_replace("#($input)#i",
