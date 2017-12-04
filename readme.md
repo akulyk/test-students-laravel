@@ -34,6 +34,6 @@ HTML-шаблоны должны быть отделены от PHP кода.
 Для оформления формы и таблицы можно использовать готовый CSS-фреймворк Twitter Bootstrap или любое другое решение.
 Данные для входа
 
-Email: maks.bukovsky@mail.com
+Email: marisol.cremin@example.com
 
 Password: secret
